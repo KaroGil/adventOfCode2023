@@ -26,3 +26,18 @@ for i in ways:
     product = product * i
 
 print(product)
+
+#part 2
+
+
+time = 38677673
+distance = 234102711571236
+
+beaten = []
+for milisecondsHeld in range(time):
+    milisecondsLeft = time - milisecondsHeld
+    distanceObtained = milisecondsHeld * milisecondsLeft
+    if distanceObtained > distance:
+        beaten.append(milisecondsHeld)
+
+print(len(beaten))
