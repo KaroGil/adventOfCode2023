@@ -2,8 +2,7 @@ with open("input.txt") as f:
     lines = f.readlines()
 
 count = 0
-# TEST_DATA = '''-1 -4 -6 -5 1 14 36 69 115 176 254 351 469 610 776 969 1191 1444 1730 2051 2409'''
-# lines = TEST_DATA.splitlines()
+
 lines = [x.strip() for x in lines]
 
 def getDiff(num1, num2):
@@ -12,7 +11,10 @@ def getDiff(num1, num2):
 def addNums(num1, diff):
     return num1+diff
 def subNums(num1, diff):
-    return num1-diff 
+    if diff > 0:
+        return num1-abs(diff)
+    else:
+        return num1-diff 
 
 def getDiffs(n):
     diffs = n
@@ -32,7 +34,7 @@ for line in lines:
     nums = [int(x) for x in nums]
 
     #reverse the list
-    nums = nums[::-1]
+    #nums = nums[::-1]
 
     diffsList.append(nums)
     #get the differences between each number until we get to 0
@@ -40,15 +42,21 @@ for line in lines:
     print(diffsList)
 
     #extrapolate
+    # for i in range(len(diffsList)-3,-1,-1):
+    #     diffsList[i].append(addNums(diffsList[i][-1], diffsList[i+1][-1]))
+    #     print(diffsList[i])
+    #     if diffsList[i][-1] == nums[-1]:
+    #         print("found it")
+    #         print(diffsList[i][-1])
+    #         count += diffsList[i][-1]
+    #         break
     for i in range(len(diffsList)-3,-1,-1):
-        diffsList[i].append(addNums(diffsList[i][-1], diffsList[i+1][-1]))
-        print(diffsList[i])
-        if diffsList[i][-1] == nums[-1]:
+        diffsList[i] = [subNums(diffsList[i][0], diffsList[i+1][0])] + diffsList[i]
+
+        if diffsList[i][1] == nums[0]:
             print("found it")
-            print(diffsList[i][-1])
-            count += diffsList[i][-1]
+            count += diffsList[i][0]
             break
-    
 
 
 print(count)
