@@ -14,13 +14,13 @@ def addNums(num1, diff):
 def subNums(num1, diff):
     return num1-diff 
 
-def getDiffs(nums):
-    diffs = nums
+def getDiffs(n):
+    diffs = n
     while not all(x == 0 for x in diffs):
         diffs = []
-        for i in range(len(nums)-1):
-            diffs.append(getDiff(nums[i], nums[i+1]))   
-        nums = diffs
+        for i in range(len(n)-1):
+            diffs.append(getDiff(n[i], n[i+1]))   
+        n = diffs
         diffsList.append(diffs)
         
 #we have to work thru every line and then store the number in the count variable to get the ans
@@ -30,7 +30,9 @@ for line in lines:
     #clean up nums
     nums = line.split(" ")
     nums = [int(x) for x in nums]
-    #nums = nums[::-1]
+
+    #reverse the list
+    nums = nums[::-1]
 
     diffsList.append(nums)
     #get the differences between each number until we get to 0
